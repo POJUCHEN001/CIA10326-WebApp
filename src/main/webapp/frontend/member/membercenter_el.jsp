@@ -232,7 +232,7 @@
            <h2>會員基本資料</h2>
           <div class="mem_center">
             <div class="mem_photo">
-              <img src="${member.photo}" alt="會員大頭照" style="width:100px; height:100px;">
+              <img src="data:image/*;base64,${photo}" alt="會員大頭照" style="width:100px; height:100px;">
               <br>
               <button>更換照片</button>
             </div>

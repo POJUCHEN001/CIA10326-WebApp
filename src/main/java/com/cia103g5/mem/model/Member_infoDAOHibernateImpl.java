@@ -1,5 +1,7 @@
 package com.cia103g5.mem.model;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 
@@ -43,6 +45,18 @@ public class Member_infoDAOHibernateImpl implements Member_infoDAO_interface {
 
 	@Override
 	public Member_info findByAccount(String account) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updatePhoto(byte[] photo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Member_info> getAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

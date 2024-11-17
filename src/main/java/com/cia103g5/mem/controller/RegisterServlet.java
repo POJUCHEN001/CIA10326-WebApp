@@ -15,7 +15,7 @@ import com.cia103g5.mem.model.Member_info;
 import com.cia103g5.mem.service.Member_infoService;
 
 @WebServlet("/frontend/member/RegisterServlet")
-@MultipartConfig	// 在類別上添加 @MultipartConfig 註解，以確保能正確處理上傳檔案。
+@MultipartConfig(maxFileSize = 5 * 1024 * 1024)	// 在類別上添加 @MultipartConfig 註解，以確保能正確處理上傳檔案。並設置上傳檔案大小
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,6 +33,8 @@ public class RegisterServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		res.setCharacterEncoding("UTF-8");
 
+		
+		
 		String account = req.getParameter("account");
 		String password = req.getParameter("password");
 		String name = req.getParameter("name");
@@ -63,12 +65,12 @@ public class RegisterServlet extends HttpServlet {
 
 		
 		try {
-			memberInfoService.insertMem(newMember);
+			memberInfoService.registerMember(newMember);
 			req.setAttribute("successMessage", "註冊成功！請前往登入。");
 			req.getRequestDispatcher("/frontend/member/login.jsp").forward(req, res); // 重定向到登入頁面
 		} catch (Exception e) {
 			e.printStackTrace();
-			req.setAttribute("errorMessage", "註冊失敗，請稍後再試。");
+			req.setAttribute("errorMessage", e.getMessage());  // 傳遞具體的錯誤訊息
 			req.getRequestDispatcher("/frontend/member/regist.jsp").forward(req, res);
 		}
 

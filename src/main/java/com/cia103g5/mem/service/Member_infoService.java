@@ -1,5 +1,7 @@
 package com.cia103g5.mem.service;
 
+import javax.security.auth.login.AccountNotFoundException;
+
 import com.cia103g5.mem.model.Member_info;
 import com.cia103g5.mem.model.Member_infoDAOJDBCImpl;
 import com.cia103g5.mem.model.Member_infoDAO_interface;
@@ -13,7 +15,7 @@ public class Member_infoService {
 	}
 
 	//	註冊會員
-	public Member_info insertMem(Member_info member) throws Exception {	
+	public Member_info registerMember(Member_info member) throws Exception {	
 		checkRegistInfo(member);
 		
 		if (isAccountExist(member.getAccount())) {
@@ -25,23 +27,23 @@ public class Member_infoService {
 	}
 	
 //	驗證會員登入
-	public Member_info login(String account, String password) throws Exception {
-	    // 從 DAO 層獲取帳號資料
+	public Member_info login(String account, String password) throws  Exception {
 	    Member_info member = dao.findByAccount(account);
 
 	    // 驗證帳號是否存在
 	    if (member == null) {
-	        throw new Exception("此帳號不存在");
+	        throw new  AccountNotFoundException("此帳號不存在");
 	    }
 	    
 	    // 驗證密碼是否正確
 	    if (!member.getPassword().equals(password)) {
 	        throw new Exception("密碼不正確");
 	    }
+	    	    
 	    return member;
 	}
 	
-	public void updateMem(String name, String nickname, Integer gender, String email) {
+	public Member_info updateMember(String name, String nickname, Integer gender, String email) {
 
 		Member_info mem = new Member_info();
 		mem.setName(name);
@@ -50,14 +52,15 @@ public class Member_infoService {
 		mem.setEmail(email);
 
 		dao.update(mem);
+		
+		return mem;
 	}
 
-	public void deleteMem(Integer mem_id) {
-
+	public void deleteMember(Integer mem_id) {
 		dao.delete(mem_id);
 	}
 
-	public Member_info getOneMem(Integer mem_id) {
+	public Member_info getOneMember(Integer mem_id) {
 		return dao.findByPK(mem_id);
 	}
 	
@@ -83,8 +86,9 @@ public class Member_infoService {
 	
 	//	檢查帳號是否存在
 	public boolean isAccountExist(String account) {	
-		Member_info member = dao.findByAccount(account);
-		return member != null;
+//		Member_info member = dao.findByAccount(account);
+//		return member != null;
+		return dao.findByAccount(account) != null;
 	}
 	
 	

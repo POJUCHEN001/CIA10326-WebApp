@@ -2,6 +2,7 @@ package com.cia103g5.mem.model;
 
 import java.sql.Date;
 
+
 public class Member_info implements java.io.Serializable {
 	
 	private Integer mem_id;

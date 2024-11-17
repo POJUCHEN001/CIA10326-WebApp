@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,6 +65,14 @@
         border: 0;
         cursor: pointer;
        }
+       /* 錯誤訊息樣式 */
+      .error-message {
+          color: red;
+          font-size: 1em;
+          font-weight: bold;
+          margin-bottom: 20px;
+          text-align: center;
+      }
 
     </style>
   </head>
@@ -100,6 +109,11 @@
       
       <div class="regist_container">
 
+		<!-- 錯誤訊息顯示區 -->
+        <c:if test="${not empty errorMessage}">
+            <div class="error-message">${errorMessage}</div>
+        </c:if>
+        
         <div class="regist_title">
           <h1>註冊會員</h1>
         </div>

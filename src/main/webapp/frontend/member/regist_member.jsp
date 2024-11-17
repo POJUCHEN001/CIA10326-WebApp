@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,6 +76,14 @@
         border-radius: 4px;
         box-sizing: border-box;
        }
+        /* 錯誤訊息樣式 */
+      .error-message {
+          color: red;
+          font-size: 1em;
+          font-weight: bold;
+          margin-bottom: 20px;
+          text-align: center;
+      }
 
 
     </style>
@@ -114,24 +123,44 @@
     <main>
       
       <div class="regist_container">
+      
+      <!-- 錯誤訊息顯示區 -->
+        <c:if test="${not empty errorMessage}">
+            <div class="error-message">${errorMessage}</div>
+        </c:if>
 
         <div class="regist_title">
           <h1>填寫會員基本資料</h1>
         </div>
+        
+        <%-- 錯誤表列 --%>
+        <c:if test="${not empty errorMsgs}">
+			<font style="color:red">請修正以下錯誤:</font>
+			<ul>
+			    <c:forEach var="message" items="${errorMsgs}">
+					<li style="color:red">${message}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
 		
         <form action="RegisterServlet" method="post" enctype="multipart/form-data">
         
           <label for="account" class="cntn_text">會員帳號</label>
-          <input type="text" id="account" name="account" required placeholder="請設置會員帳號">
+          <input type="text" id="account" name="account" required placeholder="請設置會員帳號"
+          		pattern="^[a-zA-Z0-9]{5,20}$" title="帳號需為5-20位字母或數字">
 
           <label for="password" class="cntn_text">密碼</label>
-          <input type="password" id="password" name="password" required placeholder="請設置密碼">
+          <input type="password" id="password" name="password" required placeholder="請設置密碼"
+          		pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="密碼需至少包含8個字元，且包含大小寫字母及至少一個數字">
+          
 
           <label for="name" class="cntn_text">姓名</label>
-          <input type="text" id="name" name="name" required >
+          <input type="text" id="name" name="name" required 
+          		pattern="^[\u4e00-\u9fa5a-zA-Z]{2,20}$" title="姓名僅能包含中文或英文字母">
 
           <label for="email" class="cntn_text">電子信箱</label>
-          <input type="email" id="email" name="email" required  placeholder="xxx@gmail.com">
+          <input type="email" id="email" name="email" required  placeholder="xxx@gmail.com"
+          		pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="請輸入有效的電子信箱">
 
           <label for="gender" class="cntn_text">性別</label>
           <select id="gender" name="gender" required>

@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.util.Util;
 
@@ -16,8 +18,10 @@ public class Member_infoDAOJDBCImpl implements Member_infoDAO_interface {
 	private static final String UPDATE_MEM = "UPDATE Member_info SET name=?, nickname=?, gender=?, email=?  WHERE mem_id = ?";
 	private static final String DELETE_MEM = "DELETE FROM Member_info where mem_id = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM Member_info where mem_id = ?";
-	private static final String SETPHOTO = "UPDATE Member_info SET photo=? where mem_id = ?";
+	private static final String UPDATEPHOTO = "UPDATE Member_info SET photo=? where mem_id = ?";
+//	private static final String GETPHOTO = "SELECT photo FROM Member_info where mem_id = ?";
 	private static final String FINDBYACCOUNT = "SELECT * FROM Member_info where account = ?";
+	private static final String FINDALLMEMBER = "SELECT * FROM Member_info";
 
 	static {
 		try {
@@ -47,7 +51,7 @@ public class Member_infoDAOJDBCImpl implements Member_infoDAO_interface {
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
-			se.printStackTrace();
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			closeResources(con, pstmt, null);
 		}
@@ -68,11 +72,12 @@ public class Member_infoDAOJDBCImpl implements Member_infoDAO_interface {
 			pstmt.setString(2, Member_info.getNickname());
 			pstmt.setInt(3, Member_info.getGender());
 			pstmt.setString(4, Member_info.getEmail());
+			pstmt.setInt(5, Member_info.getMem_id());
 
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
-			se.printStackTrace();
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			closeResources(con, pstmt, null);
 		}
@@ -135,49 +140,49 @@ public class Member_infoDAOJDBCImpl implements Member_infoDAO_interface {
 		}
 		return mem;
 	}
-	
-//	public Member_info findByAccount(String account, String password) { // 單筆查詢 (會員基本資料)
-//		Member_info mem = null;
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//
-//		try {
-//
-//			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-//			pstmt = con.prepareStatement(FINDBYACCOUNT);
-//			pstmt.setString(1, account);
-//			rs = pstmt.executeQuery();
-//
-//			while (rs.next()) {
-//				mem = new Member_info();
-//				mem.setMem_id(rs.getInt("mem_id"));
-//				mem.setName(rs.getString("name"));
-//				mem.setNickname(rs.getString("nickname"));
-//				mem.setAccount(rs.getString("account"));
-//				mem.setPassword(rs.getString("password"));
-//				mem.setEmail(rs.getString("email"));
-//				mem.setEmail_state(rs.getInt("email_state"));
-//				mem.setGender(rs.getInt("gender"));
-//				mem.setPhoto(rs.getBytes("photo"));
-//				mem.setPoints(rs.getInt("point"));
-//				mem.setRegistered_at(rs.getDate("registered_at"));
-//			}
-//
-//		} catch (SQLException se) {
-//			se.printStackTrace();
-//		} finally {
-//			closeResources(con, pstmt, rs);
-//		}
-//		return mem;
-//	}
 
-	public void insert(byte[] photo) {	// 新增圖片 (會員大頭照)
+	public Member_info findByAccount(String account, String password) { // 單筆查詢 (會員基本資料)
+		Member_info member = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(FINDBYACCOUNT);
+			pstmt.setString(1, account);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				member = new Member_info();
+				member.setMem_id(rs.getInt("mem_id"));
+				member.setName(rs.getString("name"));
+				member.setNickname(rs.getString("nickname"));
+				member.setAccount(rs.getString("account"));
+				member.setPassword(rs.getString("password"));
+				member.setEmail(rs.getString("email"));
+				member.setEmail_state(rs.getInt("email_state"));
+				member.setGender(rs.getInt("gender"));
+				member.setPhoto(rs.getBytes("photo"));
+				member.setPoints(rs.getInt("point"));
+				member.setRegistered_at(rs.getDate("registered_at"));
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			closeResources(con, pstmt, rs);
+		}
+		return member;
+	}
+
+	public void updatePhoto(byte[] photo) { // 更新圖片 (會員大頭照)
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			pstmt = con.prepareStatement(SETPHOTO);
+			pstmt = con.prepareStatement(UPDATEPHOTO);
 			byte[] pic = getPictureByteArray("items/FC_Barcelona.png"); // 方法
 			pstmt.setBytes(3, pic);
 			pstmt.executeUpdate();
@@ -191,7 +196,8 @@ public class Member_infoDAOJDBCImpl implements Member_infoDAO_interface {
 		}
 	}
 
-	public static byte[] getPictureByteArray(String path) throws IOException {
+	// 照片
+	public byte[] getPictureByteArray(String path) throws IOException {
 		FileInputStream fis = new FileInputStream(path);
 		byte[] photo = fis.readAllBytes();
 		fis.close();
@@ -199,7 +205,7 @@ public class Member_infoDAOJDBCImpl implements Member_infoDAO_interface {
 	}
 
 	@Override
-	public Member_info findByAccount(String account) {		//	查會員帳號
+	public Member_info findByAccount(String account) { // 查會員帳號
 		Member_info mem = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -225,7 +231,6 @@ public class Member_infoDAOJDBCImpl implements Member_infoDAO_interface {
 				mem.setPoints(rs.getInt("point"));
 				mem.setRegistered_at(rs.getDate("registered_at"));
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -233,8 +238,47 @@ public class Member_infoDAOJDBCImpl implements Member_infoDAO_interface {
 		}
 		return mem;
 	}
-	
-	//	資源關閉
+
+	@Override
+	public List<Member_info> getAll() {
+		List<Member_info> list = new ArrayList<Member_info>();
+		Member_info member = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(FINDALLMEMBER);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				member = new Member_info();
+				member.setMem_id(rs.getInt("mem_id"));
+				member.setName(rs.getString("name"));
+				member.setNickname(rs.getString("nickname"));
+				member.setAccount(rs.getString("account"));
+				member.setPassword(rs.getString("password"));
+				member.setEmail(rs.getString("email"));
+				member.setEmail_state(rs.getInt("email_state"));
+				member.setGender(rs.getInt("gender"));
+				member.setPhoto(rs.getBytes("photo"));
+				member.setPoints(rs.getInt("point"));
+				member.setRegistered_at(rs.getDate("registered_at"));
+
+				list.add(member);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			closeResources(con, pstmt, rs);
+		}
+		return list;
+	}
+
+	// 資源關閉
 	private void closeResources(Connection con, PreparedStatement pstmt, ResultSet rs) {
 		if (rs != null) {
 			try {
@@ -258,4 +302,5 @@ public class Member_infoDAOJDBCImpl implements Member_infoDAO_interface {
 			}
 		}
 	}
+
 }

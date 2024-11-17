@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 
 		if (account == null || password == null || account.isEmpty() || password.isEmpty()) {
 			req.setAttribute("errorMessage", "帳號或密碼不能為空");
-			req.getRequestDispatcher("/CIA103G5/frontend/member/login.jsp").forward(req, res);
+			req.getRequestDispatcher("/frontend/member/login.jsp").forward(req, res);
 			return;
 		}
 
@@ -49,18 +49,19 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = req.getSession();	
 			
 			if(member.getPhoto() != null) {
-				String bade64Photo = Base64.getEncoder().encodeToString(member.getPhoto());
-				session.setAttribute("photo", bade64Photo);
+				String base64Photo = Base64.getEncoder().encodeToString(member.getPhoto());
+				session.setAttribute("photo", base64Photo);
 			}
 			
 			session.setAttribute("member", member);
 			req.setAttribute("successMessage", "登入成功！即將跳轉頁面。");
 			res.sendRedirect(req.getContextPath() + "/frontend/member/membercenter_el.jsp");
+			// 或是跳轉到原先畫面
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			req.setAttribute("errorMessage", e.getMessage());
-			req.getRequestDispatcher("/CIA103G5/frontend/member/login.jsp").forward(req, res);
+			req.setAttribute("errorMessage", "帳號或密碼錯誤");
+			req.getRequestDispatcher("/frontend/member/login.jsp").forward(req, res);
 		}
 	}
 }
