@@ -9,10 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.cia103g5.mem.model.MemberInfo;
+
 
 @Entity
 @Table(name = "Ft_info")
-public class FtInfo {
+public class FtInfo extends MemberInfo {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
