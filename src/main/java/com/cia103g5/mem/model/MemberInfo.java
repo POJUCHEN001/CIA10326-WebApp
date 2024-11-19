@@ -16,7 +16,7 @@ import javax.validation.constraints.Pattern;
 
 
 @Entity
-@Table(name = "Member_Info")
+@Table(name = "member_info")
 public class MemberInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -1,5 +1,6 @@
-package com.cia103g5.ft;
+package com.cia103g5.ft.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -7,66 +8,72 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.cia103g5.mem.model.MemberInfo;
 
-
 @Entity
-@Table(name = "Ft_info")
-public class FtInfo extends MemberInfo {
-	
+@Table(name = "ft_info")
+public class FtInfo implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ft_id")
+	@GeneratedValue(strategy = GenerationType.AUTO) //	資料庫自增
+	@Column(name = "ft_id")
 	private Integer ftId;
-	
-	@Column(name="mem_id")
-	private Integer memId;
-	
-	@Column(name="ft_rank")
+
+	@OneToOne	// 與 MemberInfo 的一對一關係
+	@JoinColumn(name = "mem_id", referencedColumnName = "mem_id", nullable = false)
+	@Column(name = "mem_id")
+	private MemberInfo member; 
+
+//	@OneToOne
+	@Column(name = "ft_rank")	// 需要設, nullable = false?
 	private Integer ftRank;
-	
-	@Column(name="company_name")
+
+	@Column(name = "company_name", nullable = false)
 	private String company_name;
-	
-	@Column(name="profile_photo")
+
+	@Column(name = "profile_photo")
 	private byte[] profile_photo;
-	
-	@Column(name="registered_at")
+
+	@Column(name = "registered_at", insertable = false, updatable = false)
 	private Date registeredAt;
-	
-	@Column(name="approved_at")
+
+	@Column(name = "approved_at", insertable = false, updatable = false)
 	private Date approvedAt;
-	
-	@Column(name="status")
+
+	@Column(name = "status") // 0待審核或停用 1啟用占卜師 2永久停權
 	private Integer status;
-	
-	@Column(name="business_photo")
+
+	@Column(name = "business_photo", nullable = false)
 	private byte[] businessPhoto;
-	
-	@Column(name="business_no")
+
+	@Column(name = "business_no", nullable = false)
 	private String businessNo;
-	
-	@Column(name="nickname")
+
+	@Column(name = "nickname")
 	private String nickname;
-	
-	@Column(name="can_post")
-	private Integer canPost;	//	時間還是狀態?
-	
-	@Column(name="can_rev")
-	private Integer canRev;
-	
-	@Column(name="can_sell")
-	private Integer canSell;
-	
-	@Column(name="action_started_at")
-	private Date actionStartedAt;
-	
-	@Column(name="action_ended_at")
-	private Date actionEndedAt;
-	
-	@Column(name="bank_account")
+
+	@Column(name = "can_post")
+	private Integer canPost;	//	0停用/未啟用 1啟用
+
+	@Column(name = "can_rev")
+	private Integer canRev;		//	0停用/未啟用 1啟用
+
+	@Column(name = "can_sell")
+	private Integer canSell;	//	0停用/未啟用 1啟用
+
+	@Column(name = "action_started_at")
+	private Date actionStartedAt;	//	用Timestamp 可支持到年月日時分秒比較精準 對於停權與否的操作較為嚴謹
+
+	@Column(name = "action_ended_at")
+	private Date actionEndedAt;	//	用Timestamp 理由同上
+
+	@Column(name = "bank_account")
 	private Integer bankAccount;
 
 	public Integer getFtId() {
@@ -77,12 +84,12 @@ public class FtInfo extends MemberInfo {
 		this.ftId = ftId;
 	}
 
-	public Integer getMemId() {
-		return memId;
+	public MemberInfo getMember() {
+		return member;
 	}
 
-	public void setMemId(Integer memId) {
-		this.memId = memId;
+	public void setMember(MemberInfo member) {
+		this.member = member;
 	}
 
 	public Integer getFtRank() {
@@ -204,9 +211,12 @@ public class FtInfo extends MemberInfo {
 	public void setBankAccount(Integer bankAccount) {
 		this.bankAccount = bankAccount;
 	}
-	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	
 	
 
-	
 }
