@@ -1,4 +1,4 @@
-package com.cia103g5.mem.controller;
+package com.cia103g5.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

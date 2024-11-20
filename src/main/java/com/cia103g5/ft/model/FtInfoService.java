@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class FtInfoService {
 
 	@Autowired
-	private FtInfoRepository ftInfoRepository;
+	private FtInfoRepository repository;
 
 	public FtInfo saveMember(FtInfo ft) {
-		return ftInfoRepository.save(ft);
+		return repository.save(ft);
 	}
 
 	// 新增占卜師
@@ -27,12 +27,12 @@ public class FtInfoService {
 		ftInfo.setCanSell(0);
 //		ftInfo.setRegisteredAt(java.sql.Date.valueOf(LocalDate.now()));	//	資料庫自動插入當前時間
 
-		return ftInfoRepository.save(ftInfo);
+		return repository.save(ftInfo);
 	}
 
 	// 修改占卜師資料
 	public FtInfo updateFtInfo(Integer ftId, FtInfo updatedInfo) {
-		FtInfo ftInfo = ftInfoRepository.findById(ftId).orElseThrow(() -> new RuntimeException("占卜師資料不存在"));
+		FtInfo ftInfo = repository.findById(ftId).orElseThrow(() -> new RuntimeException("占卜師資料不存在"));
 
 		// 更新字段
 		ftInfo.setFtRank(updatedInfo.getFtRank());
@@ -50,22 +50,23 @@ public class FtInfoService {
 		ftInfo.setActionEndedAt(updatedInfo.getActionEndedAt());
 		ftInfo.setBankAccount(updatedInfo.getBankAccount());
 
-		return ftInfoRepository.save(ftInfo);
+		return repository.save(ftInfo);
 	}
 
 	// 查詢單筆占卜師資料
 	public FtInfo getFtInfoById(Integer ftId) {
-		return ftInfoRepository.findById(ftId).orElseThrow(() -> new RuntimeException("占卜師資料不存在"));
+		return repository.findById(ftId).orElseThrow(() -> new RuntimeException("占卜師資料不存在"));
 	}
 
 	// 查詢全部占卜師資料
 	public List<FtInfo> getAllFtInfos() {
-		return ftInfoRepository.findAll();
+		return repository.findAll();
 	}
 
+	
 	// 根據 memId 獲取占卜師資料
 	public FtInfo getFtInfoByMemId(Integer memId) {
-		return ftInfoRepository.findById(memId).orElseThrow(() -> new RuntimeException("占卜師資料不存在"));
+		return repository.findById(memId).orElseThrow(() -> new RuntimeException("占卜師資料不存在"));
 	}
 
 	// 啟用占卜師會員
@@ -85,7 +86,7 @@ public class FtInfoService {
 		ftInfo.setActionEndedAt(null);
 
 		// 保存到資料庫
-		ftInfoRepository.save(ftInfo);
+		repository.save(ftInfo);
 	}
 
 	// 檢查占卜師是否可以執行某操作
@@ -144,7 +145,7 @@ public class FtInfoService {
 		// 設定結束時間為 3 天後
 		ftInfo.setActionEndedAt(new java.sql.Date(System.currentTimeMillis() + 3L * 24 * 60 * 60 * 1000));
 
-		ftInfoRepository.save(ftInfo);
+		repository.save(ftInfo);
 	}
 
 	// 定時檢查停權到期的占卜師並自動恢復
@@ -153,7 +154,7 @@ public class FtInfoService {
 		LocalDateTime now = LocalDateTime.now();
 
 		// 查詢所有狀態為停權且停權結束時間已過的占卜師
-		List<FtInfo> suspendedFtInfos = ftInfoRepository.findByStatusAndActionEndedAtBefore(0, now);
+		List<FtInfo> suspendedFtInfos = repository.findByStatusAndActionEndedAtBefore(0, now);
 
 		for (FtInfo ftInfo : suspendedFtInfos) {
 			// 恢復占卜師狀態

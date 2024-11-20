@@ -1,4 +1,4 @@
-package com.cia103g5.mem.model;
+package com.cia103g5.member.model;
 
 import java.sql.Date;
 

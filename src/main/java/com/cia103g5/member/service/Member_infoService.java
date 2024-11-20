@@ -1,10 +1,10 @@
-package com.cia103g5.mem.service;
+package com.cia103g5.member.service;
 
 import javax.security.auth.login.AccountNotFoundException;
 
-import com.cia103g5.mem.model.Member_info;
-import com.cia103g5.mem.model.Member_infoDAOJDBCImpl;
-import com.cia103g5.mem.model.Member_infoDAO_interface;
+import com.cia103g5.member.model.Member_info;
+import com.cia103g5.member.model.Member_infoDAOJDBCImpl;
+import com.cia103g5.member.model.Member_infoDAO_interface;
 
 public class Member_infoService {
 

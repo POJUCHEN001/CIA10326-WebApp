@@ -1,4 +1,4 @@
-package com.cia103g5.mem.controller;
+package com.cia103g5.member.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.cia103g5.mem.model.Member_info;
-import com.cia103g5.mem.service.Member_infoService;
+import com.cia103g5.member.model.Member_info;
+import com.cia103g5.member.service.Member_infoService;
 
 @WebServlet("/frontend/member/RegisterServlet")
 @MultipartConfig(maxFileSize = 5 * 1024 * 1024)	// 在類別上添加 @MultipartConfig 註解，以確保能正確處理上傳檔案。並設置上傳檔案大小

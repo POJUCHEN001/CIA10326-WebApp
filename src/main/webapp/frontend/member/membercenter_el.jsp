@@ -226,7 +226,7 @@
     </aside>
 
     <main>
-      <jsp:useBean id="member" scope="session" class="com.cia103g5.mem.model.Member_info" />
+      <jsp:useBean id="member" scope="session" class="com.cia103g5.member.model.Member_info" />
       
       <div class="container">
            <h2>會員基本資料</h2>

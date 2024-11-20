@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.cia103g5.mem.model.MemberInfo;
+import com.cia103g5.member.model.MemberInfo;
 
 @Entity
 @Table(name = "ft_info")

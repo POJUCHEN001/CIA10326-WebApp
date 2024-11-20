@@ -1,4 +1,4 @@
-package com.cia103g5.mem.controller;
+package com.cia103g5.member.controller;
 
 import java.io.IOException;
 import java.util.Base64;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.cia103g5.mem.model.Member_info;
-import com.cia103g5.mem.service.Member_infoService;
+import com.cia103g5.member.model.Member_info;
+import com.cia103g5.member.service.Member_infoService;
 
 /**
  * Servlet implementation class LoginServlet

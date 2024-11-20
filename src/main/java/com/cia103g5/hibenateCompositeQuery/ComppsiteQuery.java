@@ -14,7 +14,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.cia103g5.violation.model.MemberVioRecord;
+import com.cia103g5.memberviolation.model.MemberVioRecord;
 
 public class ComppsiteQuery {
 	
