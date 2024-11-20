@@ -71,6 +71,9 @@ public class MemberInfo implements Serializable {
 
 	@Column(name = "points")
 	private Integer points;
+	
+	@Column(name= "bank_account", length = 50)
+	private String bankAccount;
 
 	
 	// 無參數建構子
@@ -182,4 +185,14 @@ public class MemberInfo implements Serializable {
 	public void setPoints(Integer points) {
 		this.points = points;
 	}
+
+	public String getBankAccount() {
+		return bankAccount;
+	}
+
+	public void setBankAccount(String bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+	
+	
 }

@@ -5,6 +5,9 @@ import java.sql.Date;
 
 public class Member_info implements java.io.Serializable {
 	
+
+	private static final long serialVersionUID = 1L;
+
 	private Integer mem_id;
 	private Integer ft_id;
 	private String name;

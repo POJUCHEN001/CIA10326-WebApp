@@ -19,7 +19,7 @@ public class MemberVioRecord implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // 自動生成主鍵
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // 自增主鍵
 	@Column(name = "violation_record_no")
 	private Integer vioRecordNo;
 	

@@ -1,14 +1,11 @@
 package com.cia103g5.violation.model;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.cia103g5.hibenateCompositeQuery.ComppsiteQuery;
 
 @Service
 public class MemberVioService {
@@ -49,8 +46,8 @@ public class MemberVioService {
 	}
 	
 	//	複合查詢
-	public List<MemberVioRecord> getAllMemberVioRecord(Map<String, String[]> map){
-		return ComppsiteQuery.getAll(map,sessionFactory.openSession());
-	}
+//	public List<MemberVioRecord> getAllMemberVioRecord(Map<String, String[]> map){
+//		return ComppsiteQuery.getAll(map,sessionFactory.openSession());
+//	}
 
 }
