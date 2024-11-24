@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository	
-public interface MemberInfoRepository extends JpaRepository<MemberInfo, Integer	>{
+public interface MemberInfoRepository extends JpaRepository<MemberVO, Integer	>{
 
-	Optional<MemberInfo> findByAccount(String account);
+	Optional<MemberVO> findByAccount(String account);
+	
+	
 }

@@ -12,11 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.cia103g5.member.model.MemberInfo;
+import com.cia103g5.member.model.MemberVO;
 
 @Entity
 @Table(name = "ft_info")
-public class FtInfo implements Serializable {
+public class FtVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +28,7 @@ public class FtInfo implements Serializable {
 	@OneToOne	// 與 MemberInfo 的一對一關係
 	@JoinColumn(name = "mem_id", referencedColumnName = "mem_id", nullable = false)
 	@Column(name = "mem_id")
-	private MemberInfo member; 
+	private MemberVO member; 
 
 //	@OneToOne
 	@Column(name = "ft_rank")	// 需要設, nullable = false?
@@ -84,11 +84,11 @@ public class FtInfo implements Serializable {
 		this.ftId = ftId;
 	}
 
-	public MemberInfo getMember() {
+	public MemberVO getMember() {
 		return member;
 	}
 
-	public void setMember(MemberInfo member) {
+	public void setMember(MemberVO member) {
 		this.member = member;
 	}
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cia103g5.member.model.MemberInfo;
+import com.cia103g5.member.model.MemberVO;
 import com.cia103g5.member.model.MemberInfoService;
 
 @RestController
@@ -39,19 +39,19 @@ public class MemberController {
 
     // 查詢會員
     @GetMapping("/{id}")
-    public MemberInfo getMemberById(@PathVariable("id") Integer memId) {
+    public MemberVO getMemberById(@PathVariable("id") Integer memId) {
         return service.findMemberById(memId);
     }
 
     // 查詢會員 (根據帳號)
     @GetMapping("/account/{account}")
-    public MemberInfo getMemberByAccount(@PathVariable("account") String account) {
+    public MemberVO getMemberByAccount(@PathVariable("account") String account) {
         return service.findMemberByAccount(account);
     }
 
     // 查詢所有會員
     @GetMapping
-    public List<MemberInfo> getAllMembers() {
+    public List<MemberVO> getAllMembers() {
         return service.getAllMembers();
     }
 

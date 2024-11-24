@@ -8,23 +8,23 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FtInfoRepository extends JpaRepository<FtInfo, Integer> {
+public interface FtInfoRepository extends JpaRepository<FtVO, Integer> {
 
 	// 根據 ftId 查找對應的占卜師資料
-	Optional<FtInfo> findByFtId(Long ftId);
+	Optional<FtVO> findByFtId(Long ftId);
 
 	// 根據 status 查找所有尚未啟用的占卜師
-	List<FtInfo> findByStatus(Integer status);
+	List<FtVO> findByStatus(Integer status);
 
 	// 根據 ftRank 查找對應等級的占卜師
-	List<FtInfo> findByFtRank(Integer ftRank);
+	List<FtVO> findByFtRank(Integer ftRank);
 
 	// 根據是否可以發布 (canPost = true) 查找占卜師
-	List<FtInfo> findByCanPostTrue();
+	List<FtVO> findByCanPostTrue();
 
 	// 根據暱稱部分關鍵字進行模糊查詢
-	List<FtInfo> findByNicknameContaining(String keyword);
+	List<FtVO> findByNicknameContaining(String keyword);
 
 	// 查詢狀態為停權且停權結束時間已過的占卜師
-	List<FtInfo> findByStatusAndActionEndedAtBefore(Integer status, LocalDateTime currentTime);
+	List<FtVO> findByStatusAndActionEndedAtBefore(Integer status, LocalDateTime currentTime);
 }

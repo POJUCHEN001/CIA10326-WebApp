@@ -16,7 +16,7 @@ public class MemberInfoService {
 	// 新增會員
 	public void addMember(String account, String password, String name, String email, Integer gender, MultipartFile photo) {
         try {
-            MemberInfo newMember = new MemberInfo();
+            MemberVO newMember = new MemberVO();
             newMember.setAccount(account);
             newMember.setPassword(password);
             newMember.setName(name);
@@ -32,7 +32,7 @@ public class MemberInfoService {
     }
 	
 	// 註冊會員
-	public MemberInfo registMembers(MemberInfo member) throws Exception{
+	public MemberVO registMembers(MemberVO member) throws Exception{
 		checkRegistInfo(member);
 		if(isAccountExist(member.getAccount())) {
 			throw new Exception ("帳號已存在，請使用其他帳號進行註冊");
@@ -41,22 +41,22 @@ public class MemberInfoService {
 	}
 
 	// 更新會員
-	public void updateMember(MemberInfo memberInfo) {
+	public void updateMember(MemberVO memberInfo) {
 		repository.save(memberInfo);
 	}
 
 	// 根據 ID 查詢會員
-	public MemberInfo findMemberById(Integer memId) {
+	public MemberVO findMemberById(Integer memId) {
 		return repository.findById(memId).orElseThrow(() -> new RuntimeException("會員不存在，ID: " + memId));
 	}
 
 	// 根據帳號查詢會員
-	public MemberInfo findMemberByAccount(String account) {
+	public MemberVO findMemberByAccount(String account) {
 		return repository.findByAccount(account).orElseThrow(() -> new RuntimeException("會員帳號不存在，Account: " + account));
 	}
 
 	// 查詢所有會員
-	public List<MemberInfo> getAllMembers() {
+	public List<MemberVO> getAllMembers() {
 		return repository.findAll();
 	}
 
@@ -68,7 +68,7 @@ public class MemberInfoService {
 //	}
 	public void updateMemberPhoto(Integer memId, MultipartFile photo) {
         try {
-            MemberInfo member = findMemberById(memId);
+            MemberVO member = findMemberById(memId);
             if (photo != null && !photo.isEmpty()) {
                 member.setPhoto(photo.getBytes());
             }
@@ -79,7 +79,7 @@ public class MemberInfoService {
     }
 	
 	// 檢查註冊資訊
-    private void checkRegistInfo(MemberInfo member) throws Exception {
+    private void checkRegistInfo(MemberVO member) throws Exception {
         if (member.getAccount() == null || member.getAccount().trim().isEmpty()) {
             throw new Exception("帳號不得為空");
         }

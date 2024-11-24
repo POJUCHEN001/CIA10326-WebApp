@@ -14,12 +14,12 @@ public class FtInfoService {
 	@Autowired
 	private FtInfoRepository repository;
 
-	public FtInfo saveMember(FtInfo ft) {
+	public FtVO saveMember(FtVO ft) {
 		return repository.save(ft);
 	}
 
 	// 新增占卜師
-	public FtInfo createFtInfo(FtInfo ftInfo) {
+	public FtVO createFtInfo(FtVO ftInfo) {
 		// 初始化狀態及權限
 		ftInfo.setStatus(0); // 初始為待審核狀態
 		ftInfo.setCanPost(0);
@@ -31,8 +31,8 @@ public class FtInfoService {
 	}
 
 	// 修改占卜師資料
-	public FtInfo updateFtInfo(Integer ftId, FtInfo updatedInfo) {
-		FtInfo ftInfo = repository.findById(ftId).orElseThrow(() -> new RuntimeException("占卜師資料不存在"));
+	public FtVO updateFtInfo(Integer ftId, FtVO updatedInfo) {
+		FtVO ftInfo = repository.findById(ftId).orElseThrow(() -> new RuntimeException("占卜師資料不存在"));
 
 		// 更新字段
 		ftInfo.setFtRank(updatedInfo.getFtRank());
@@ -54,24 +54,24 @@ public class FtInfoService {
 	}
 
 	// 查詢單筆占卜師資料
-	public FtInfo getFtInfoById(Integer ftId) {
+	public FtVO getFtInfoById(Integer ftId) {
 		return repository.findById(ftId).orElseThrow(() -> new RuntimeException("占卜師資料不存在"));
 	}
 
 	// 查詢全部占卜師資料
-	public List<FtInfo> getAllFtInfos() {
+	public List<FtVO> getAllFtInfos() {
 		return repository.findAll();
 	}
 
 	
 	// 根據 memId 獲取占卜師資料
-	public FtInfo getFtInfoByMemId(Integer memId) {
+	public FtVO getFtInfoByMemId(Integer memId) {
 		return repository.findById(memId).orElseThrow(() -> new RuntimeException("占卜師資料不存在"));
 	}
 
 	// 啟用占卜師會員
 	public void activateFtInfo(Integer memId) {
-		FtInfo ftInfo = getFtInfoByMemId(memId);
+		FtVO ftInfo = getFtInfoByMemId(memId);
 
 		// 更新狀態為啟用
 		ftInfo.setStatus(1);
@@ -91,7 +91,7 @@ public class FtInfoService {
 
 	// 檢查占卜師是否可以執行某操作
 	public boolean canPerformAction(Integer memId, String actionType) {
-		FtInfo ftInfo = getFtInfoByMemId(memId);
+		FtVO ftInfo = getFtInfoByMemId(memId);
 
 		// 如果狀態為停權（0），則禁止操作
 		if (ftInfo.getStatus() == 0) {
@@ -131,7 +131,7 @@ public class FtInfoService {
 
 	// 更新占卜師狀態為停權
 	public void suspendFtInfo(Integer memId) {
-		FtInfo ftInfo = getFtInfoByMemId(memId);
+		FtVO ftInfo = getFtInfoByMemId(memId);
 
 		// 更新狀態為停權
 		ftInfo.setStatus(0);
@@ -154,9 +154,9 @@ public class FtInfoService {
 		LocalDateTime now = LocalDateTime.now();
 
 		// 查詢所有狀態為停權且停權結束時間已過的占卜師
-		List<FtInfo> suspendedFtInfos = repository.findByStatusAndActionEndedAtBefore(0, now);
+		List<FtVO> suspendedFtInfos = repository.findByStatusAndActionEndedAtBefore(0, now);
 
-		for (FtInfo ftInfo : suspendedFtInfos) {
+		for (FtVO ftInfo : suspendedFtInfos) {
 			// 恢復占卜師狀態
 			activateFtInfo(ftInfo.getFtId());
 			System.out.println("占卜師 " + ftInfo.getFtId() + " 已自動解除停權");
