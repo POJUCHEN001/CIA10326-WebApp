@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MemberVioRepository extends JpaRepository<MemberVioRecord, Integer>{
+public interface MemberVioRepository extends JpaRepository<MemberViolationRecord, Integer>{
 
 }

@@ -17,13 +17,13 @@ public class MemberVioService {
     private SessionFactory sessionFactory;
 	
 	//	新稱會員違規紀錄
-	public MemberVioRecord addMemberVioRecord(MemberVioRecord memberVioRecord) {
+	public MemberViolationRecord addMemberVioRecord(MemberViolationRecord memberVioRecord) {
 		repository.save(memberVioRecord);
 		return memberVioRecord;
 	}
 	
 	//	修改會員違規紀錄
-	public MemberVioRecord updateMemberVioRecord(MemberVioRecord memberVioRecord) {
+	public MemberViolationRecord updateMemberVioRecord(MemberViolationRecord memberVioRecord) {
 		repository.save(memberVioRecord);
 		return memberVioRecord;
 	}
@@ -35,13 +35,13 @@ public class MemberVioService {
 	}
 	
 	//	查詢單一會員違規紀錄
-	public MemberVioRecord getMemberVioRecord(Integer memId) {
-		Optional<MemberVioRecord> optional = repository.findById(memId);
+	public MemberViolationRecord getMemberVioRecord(Integer memId) {
+		Optional<MemberViolationRecord> optional = repository.findById(memId);
 		return optional.get();
 	}
 	
 	//	查詢全部會員違規紀錄
-	public List<MemberVioRecord> getAllMemberVioRecord(){
+	public List<MemberViolationRecord> getAllMemberVioRecord(){
 		return repository.findAll();
 	}
 	

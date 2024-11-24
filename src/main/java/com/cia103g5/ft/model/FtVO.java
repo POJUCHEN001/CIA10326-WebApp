@@ -14,6 +14,13 @@ import javax.persistence.Table;
 
 import com.cia103g5.member.model.MemberVO;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "ft_info")
 public class FtVO implements Serializable {
@@ -40,11 +47,11 @@ public class FtVO implements Serializable {
 	@Column(name = "profile_photo")
 	private byte[] profile_photo;
 
-	@Column(name = "registered_at", insertable = false, updatable = false)
-	private Date registeredAt;
+	@Column(name = "registered_time", insertable = false, updatable = false)
+	private Date registeredTime;
 
-	@Column(name = "approved_at", insertable = false, updatable = false)
-	private Date approvedAt;
+	@Column(name = "approved_time", insertable = false, updatable = false)
+	private Date approvedTime;
 
 	@Column(name = "status") // 0待審核或停用 1啟用占卜師 2永久停權
 	private Integer status;
@@ -67,154 +74,20 @@ public class FtVO implements Serializable {
 	@Column(name = "can_sell")
 	private Integer canSell;	//	0停用/未啟用 1啟用
 
-	@Column(name = "action_started_at")
-	private Date actionStartedAt;	//	用Timestamp 可支持到年月日時分秒比較精準 對於停權與否的操作較為嚴謹
+	@Column(name = "action_started_day")
+	private Date actionStartedDay;	//	用Timestamp 可支持到年月日時分秒比較精準 對於停權與否的操作較為嚴謹
 
-	@Column(name = "action_ended_at")
-	private Date actionEndedAt;	//	用Timestamp 理由同上
+	@Column(name = "action_ended_day")
+	private Date actionEndedDay;	//	用Timestamp 理由同上
 
 	@Column(name = "bank_account")
 	private Integer bankAccount;
 
-	public Integer getFtId() {
-		return ftId;
-	}
-
-	public void setFtId(Integer ftId) {
-		this.ftId = ftId;
-	}
-
-	public MemberVO getMember() {
-		return member;
-	}
-
-	public void setMember(MemberVO member) {
-		this.member = member;
-	}
-
-	public Integer getFtRank() {
-		return ftRank;
-	}
-
-	public void setFtRank(Integer ftRank) {
-		this.ftRank = ftRank;
-	}
-
-	public String getCompany_name() {
-		return company_name;
-	}
-
-	public void setCompany_name(String company_name) {
-		this.company_name = company_name;
-	}
-
-	public byte[] getProfile_photo() {
-		return profile_photo;
-	}
-
-	public void setProfile_photo(byte[] profile_photo) {
-		this.profile_photo = profile_photo;
-	}
-
-	public Date getRegisteredAt() {
-		return registeredAt;
-	}
-
-	public void setRegisteredAt(Date registeredAt) {
-		this.registeredAt = registeredAt;
-	}
-
-	public Date getApprovedAt() {
-		return approvedAt;
-	}
-
-	public void setApprovedAt(Date approvedAt) {
-		this.approvedAt = approvedAt;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public byte[] getBusinessPhoto() {
-		return businessPhoto;
-	}
-
-	public void setBusinessPhoto(byte[] businessPhoto) {
-		this.businessPhoto = businessPhoto;
-	}
-
-	public String getBusinessNo() {
-		return businessNo;
-	}
-
-	public void setBusinessNo(String businessNo) {
-		this.businessNo = businessNo;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public Integer getCanPost() {
-		return canPost;
-	}
-
-	public void setCanPost(Integer canPost) {
-		this.canPost = canPost;
-	}
-
-	public Integer getCanRev() {
-		return canRev;
-	}
-
-	public void setCanRev(Integer canRev) {
-		this.canRev = canRev;
-	}
-
-	public Integer getCanSell() {
-		return canSell;
-	}
-
-	public void setCanSell(Integer canSell) {
-		this.canSell = canSell;
-	}
-
-	public Date getActionStartedAt() {
-		return actionStartedAt;
-	}
-
-	public void setActionStartedAt(Date actionStartedAt) {
-		this.actionStartedAt = actionStartedAt;
-	}
-
-	public Date getActionEndedAt() {
-		return actionEndedAt;
-	}
-
-	public void setActionEndedAt(Date actionEndedAt) {
-		this.actionEndedAt = actionEndedAt;
-	}
-
-	public Integer getBankAccount() {
-		return bankAccount;
-	}
-
-	public void setBankAccount(Integer bankAccount) {
-		this.bankAccount = bankAccount;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	@Column( name = "intro")
+	private String intro;
+	
+	@Column(name = "price")
+	private Integer price;
 
 	
 	

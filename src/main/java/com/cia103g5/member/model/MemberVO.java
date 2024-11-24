@@ -14,6 +14,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "member_info")
 public class MemberVO implements Serializable {
@@ -25,8 +32,8 @@ public class MemberVO implements Serializable {
 	@Column(name = "mem_id")
 	private Integer memId;
 
-	@Column(name = "ft_id")
-	private Integer ftId;
+//	@Column(name = "ft_id")
+//	private Integer ftId;
 
 	@Column(name = "name", nullable = false) // 名稱必填
 	@NotEmpty(message = "姓名請勿空白")
@@ -75,122 +82,6 @@ public class MemberVO implements Serializable {
 	@Column(name = "bank_account", length = 50)
 	private String bankAccount;
 
-	// 無參數建構子
-	public MemberVO() {
-		super();
-	}
-
-	// Getter 和 Setter 方法
-	public Integer getMemId() {
-		return memId;
-	}
-
-	public void setMemId(Integer memId) {
-		this.memId = memId;
-	}
-
-	public Integer getFtId() {
-		return ftId;
-	}
-
-	public void setFtId(Integer ftId) {
-		this.ftId = ftId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Integer getEmailState() {
-		return emailState;
-	}
-
-	public void setEmailState(Integer emailState) {
-		this.emailState = emailState;
-	}
-
-	public Date getRegisteredTime() {
-		return registeredTime;
-	}
-
-	public void setRegisteredTime(Date registeredTime) {
-		this.registeredTime = registeredTime;
-	}
-
-	public byte[] getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
-	}
-
-	public Integer getGender() {
-		return gender;
-	}
-
-	public void setGender(Integer gender) {
-		this.gender = gender;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public Integer getPoints() {
-		return points;
-	}
-
-	public void setPoints(Integer points) {
-		this.points = points;
-	}
-
-	public String getBankAccount() {
-		return bankAccount;
-	}
-
-	public void setBankAccount(String bankAccount) {
-		this.bankAccount = bankAccount;
-	}
+	
 
 }

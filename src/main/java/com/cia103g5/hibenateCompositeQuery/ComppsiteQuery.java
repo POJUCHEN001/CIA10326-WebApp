@@ -14,11 +14,11 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.cia103g5.memberviolation.model.MemberVioRecord;
+import com.cia103g5.memberviolation.model.MemberViolationRecord;
 
 public class ComppsiteQuery {
 	
-	public static Predicate get_aPredicate_For_AnyDB(CriteriaBuilder builder, Root<MemberVioRecord> root, String columnName, String value) {
+	public static Predicate get_aPredicate_For_AnyDB(CriteriaBuilder builder, Root<MemberViolationRecord> root, String columnName, String value) {
 		
 		Predicate predicate = null;
 		
@@ -26,15 +26,15 @@ public class ComppsiteQuery {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<MemberVioRecord> getAll(Map<String, String[]> map, Session session){
+	public static List<MemberViolationRecord> getAll(Map<String, String[]> map, Session session){
 		
 		Transaction tx = session.beginTransaction();
-		List<MemberVioRecord> list = null;
+		List<MemberViolationRecord> list = null;
 		
 		try {
 			CriteriaBuilder builder = session.getCriteriaBuilder();
-			CriteriaQuery<MemberVioRecord> criteriaQuery = builder.createQuery(MemberVioRecord.class);
-			Root<MemberVioRecord> root = criteriaQuery.from(MemberVioRecord.class);
+			CriteriaQuery<MemberViolationRecord> criteriaQuery = builder.createQuery(MemberViolationRecord.class);
+			Root<MemberViolationRecord> root = criteriaQuery.from(MemberViolationRecord.class);
 			
 			List<Predicate> predicateList = new ArrayList<Predicate>();
 			
