@@ -1,4 +1,4 @@
-package com.cia103g5.memberviolation.model;
+package com.cia103g5.violation.model;
 
 import java.util.List;
 import java.util.Optional;

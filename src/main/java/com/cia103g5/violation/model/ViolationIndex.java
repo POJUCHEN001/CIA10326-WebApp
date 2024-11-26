@@ -1,4 +1,4 @@
-package com.cia103g5.memberviolation.model;
+package com.cia103g5.violation.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
