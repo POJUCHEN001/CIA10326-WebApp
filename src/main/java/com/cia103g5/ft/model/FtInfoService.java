@@ -46,8 +46,8 @@ public class FtInfoService {
 		ftInfo.setCanPost(updatedInfo.getCanPost());
 		ftInfo.setCanRev(updatedInfo.getCanRev());
 		ftInfo.setCanSell(updatedInfo.getCanSell());
-		ftInfo.setActionStartedAt(updatedInfo.getActionStartedAt());
-		ftInfo.setActionEndedAt(updatedInfo.getActionEndedAt());
+		ftInfo.setActionStartedDay(updatedInfo.getActionStartedDay());
+		ftInfo.setActionEndedDay(updatedInfo.getActionEndedDay());
 		ftInfo.setBankAccount(updatedInfo.getBankAccount());
 
 		return repository.save(ftInfo);
@@ -82,8 +82,8 @@ public class FtInfoService {
 		ftInfo.setCanSell(1);
 
 		// 清除停權時間
-		ftInfo.setActionStartedAt(null);
-		ftInfo.setActionEndedAt(null);
+		ftInfo.setActionStartedDay(null);
+		ftInfo.setActionEndedDay(null);
 
 		// 保存到資料庫
 		repository.save(ftInfo);
@@ -102,11 +102,11 @@ public class FtInfoService {
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 
 		// 檢查可用時間範圍
-		if (ftInfo.getActionStartedAt() != null && ftInfo.getActionEndedAt() != null) {
+		if (ftInfo.getActionStartedDay() != null && ftInfo.getActionEndedDay() != null) {
 
 			// 將 java.sql.Date 強制轉換為 Timestamp
-			Timestamp actionStartedAt = new Timestamp(ftInfo.getActionStartedAt().getTime());
-			Timestamp actionEndedAt = new Timestamp(ftInfo.getActionEndedAt().getTime());
+			Timestamp actionStartedAt = new Timestamp(ftInfo.getActionStartedDay().getTime());
+			Timestamp actionEndedAt = new Timestamp(ftInfo.getActionEndedDay().getTime());
 
 			if (now.before(actionStartedAt) || now.after(actionEndedAt)) {
 				return false;
@@ -140,10 +140,10 @@ public class FtInfoService {
 		ftInfo.setCanSell(0); // 禁止上架
 		
 		// 設定開始時間為當前日期
-		ftInfo.setActionStartedAt(new java.sql.Date(System.currentTimeMillis()));
+		ftInfo.setActionStartedDay(new java.sql.Date(System.currentTimeMillis()));
 
 		// 設定結束時間為 3 天後
-		ftInfo.setActionEndedAt(new java.sql.Date(System.currentTimeMillis() + 3L * 24 * 60 * 60 * 1000));
+		ftInfo.setActionEndedDay(new java.sql.Date(System.currentTimeMillis() + 3L * 24 * 60 * 60 * 1000));
 
 		repository.save(ftInfo);
 	}

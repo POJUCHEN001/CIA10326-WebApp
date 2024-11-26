@@ -2,6 +2,7 @@ package com.cia103g5.ft.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -89,7 +90,199 @@ public class FtVO implements Serializable {
 	@Column(name = "price")
 	private Integer price;
 
+	public FtVO() {
+		super();
+	}
+
+	public FtVO(Integer ftId, MemberVO member, Integer ftRank, String company_name, byte[] profile_photo,
+			Date registeredTime, Date approvedTime, Integer status, byte[] businessPhoto, String businessNo,
+			String nickname, Integer canPost, Integer canRev, Integer canSell, Date actionStartedDay,
+			Date actionEndedDay, Integer bankAccount, String intro, Integer price) {
+		super();
+		this.ftId = ftId;
+		this.member = member;
+		this.ftRank = ftRank;
+		this.company_name = company_name;
+		this.profile_photo = profile_photo;
+		this.registeredTime = registeredTime;
+		this.approvedTime = approvedTime;
+		this.status = status;
+		this.businessPhoto = businessPhoto;
+		this.businessNo = businessNo;
+		this.nickname = nickname;
+		this.canPost = canPost;
+		this.canRev = canRev;
+		this.canSell = canSell;
+		this.actionStartedDay = actionStartedDay;
+		this.actionEndedDay = actionEndedDay;
+		this.bankAccount = bankAccount;
+		this.intro = intro;
+		this.price = price;
+	}
+
+	public Integer getFtId() {
+		return ftId;
+	}
+
+	public void setFtId(Integer ftId) {
+		this.ftId = ftId;
+	}
+
+	public MemberVO getMember() {
+		return member;
+	}
+
+	public void setMember(MemberVO member) {
+		this.member = member;
+	}
+
+	public Integer getFtRank() {
+		return ftRank;
+	}
+
+	public void setFtRank(Integer ftRank) {
+		this.ftRank = ftRank;
+	}
+
+	public String getCompany_name() {
+		return company_name;
+	}
+
+	public void setCompany_name(String company_name) {
+		this.company_name = company_name;
+	}
+
+	public byte[] getProfile_photo() {
+		return profile_photo;
+	}
+
+	public void setProfile_photo(byte[] profile_photo) {
+		this.profile_photo = profile_photo;
+	}
+
+	public Date getRegisteredTime() {
+		return registeredTime;
+	}
+
+	public void setRegisteredTime(Date registeredTime) {
+		this.registeredTime = registeredTime;
+	}
+
+	public Date getApprovedTime() {
+		return approvedTime;
+	}
+
+	public void setApprovedTime(Date approvedTime) {
+		this.approvedTime = approvedTime;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public byte[] getBusinessPhoto() {
+		return businessPhoto;
+	}
+
+	public void setBusinessPhoto(byte[] businessPhoto) {
+		this.businessPhoto = businessPhoto;
+	}
+
+	public String getBusinessNo() {
+		return businessNo;
+	}
+
+	public void setBusinessNo(String businessNo) {
+		this.businessNo = businessNo;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public Integer getCanPost() {
+		return canPost;
+	}
+
+	public void setCanPost(Integer canPost) {
+		this.canPost = canPost;
+	}
+
+	public Integer getCanRev() {
+		return canRev;
+	}
+
+	public void setCanRev(Integer canRev) {
+		this.canRev = canRev;
+	}
+
+	public Integer getCanSell() {
+		return canSell;
+	}
+
+	public void setCanSell(Integer canSell) {
+		this.canSell = canSell;
+	}
+
+	public Date getActionStartedDay() {
+		return actionStartedDay;
+	}
+
+	public void setActionStartedDay(Date actionStartedDay) {
+		this.actionStartedDay = actionStartedDay;
+	}
+
+	public Date getActionEndedDay() {
+		return actionEndedDay;
+	}
+
+	public void setActionEndedDay(Date actionEndedDay) {
+		this.actionEndedDay = actionEndedDay;
+	}
+
+	public Integer getBankAccount() {
+		return bankAccount;
+	}
+
+	public void setBankAccount(Integer bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+
+	public String getIntro() {
+		return intro;
+	}
+
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "FtVO [ftId=" + ftId + ", member=" + member + ", ftRank=" + ftRank + ", company_name=" + company_name
+				+ ", profile_photo=" + Arrays.toString(profile_photo) + ", registeredTime=" + registeredTime
+				+ ", approvedTime=" + approvedTime + ", status=" + status + ", businessPhoto="
+				+ Arrays.toString(businessPhoto) + ", businessNo=" + businessNo + ", nickname=" + nickname
+				+ ", canPost=" + canPost + ", canRev=" + canRev + ", canSell=" + canSell + ", actionStartedDay="
+				+ actionStartedDay + ", actionEndedDay=" + actionEndedDay + ", bankAccount=" + bankAccount + ", intro="
+				+ intro + ", price=" + price + "]";
+	}
 	
-	
+
 
 }
